@@ -1,6 +1,14 @@
 .Deck {
-  text-align: center;
   flex: 2;
-  border: 1px solid white;
+  display: flex;
+  align-self: center;
+}
+
+.Deck div{
+  margin-right: 10px;
+}
+
+.Deck .Crapo{
+  margin-left: 50px;
 }
 

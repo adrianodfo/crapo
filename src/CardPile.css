@@ -1,5 +1,9 @@
 .CardPile {
-  text-align: center;
-  flex: 8;
+  box-sizing:border-box;
+  text-align: left;
+  width: 64px;
+  height: 96px;
+  border: 1px solid black;
+  border-radius: 5px;
 }
 
