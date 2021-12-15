@@ -2,7 +2,7 @@ import './Card.css';
 
 export function Card(props) {
   return (
-    <div className="Card">
+    <div className="Card" style={props.OverrideStyle}>
       <span>{props.Index}</span>
       <div>{props.Suit}</div>
     </div>

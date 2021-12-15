@@ -1,13 +1,33 @@
 import './WorkingPile.css';
 import {Card, Suits} from './Card';
 
-function WorkingPile() {
+function WorkingPile(props) {
+
+  var cards;
+
+  if(props.Cards)
+  {
+    cards = (props.Cards.map((card, mapIndex) => renderCard(card, mapIndex)));
+  }
+
   return (
       <div className="WorkingPile">
-        <Card Index="9" Suit={Suits.Diamond} />
-        <Card Index="10" Suit={Suits.Spade} />
+      {cards}
       </div>
   );
+
+  function renderCard(card, mapIndex){
+
+    const cardStyle = {
+      marginLeft: "-40px"
+    };
+    
+    return(<Card 
+      Index={card.Index} 
+      Suit={card.Suit}
+      Key={mapIndex}
+      OverrideStyle={cardStyle} />);
+  }
 }
 
 export default WorkingPile;
