@@ -1,7 +1,7 @@
-import './BoardRow.css';
-import WorkingPile from './WorkingPile';
-import Stack from './Stack';
-import {Suits} from './Card';
+import "./BoardRow.css";
+import WorkingPile from "./WorkingPile";
+import Stack from "./Stack";
+import {Suits} from "./Card";
 
 function BoardRow() {
 

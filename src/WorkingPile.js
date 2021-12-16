@@ -1,5 +1,5 @@
-import './WorkingPile.css';
-import {Card, Suits} from './Card';
+import "./WorkingPile.css";
+import {Card, Suits} from "./Card";
 
 function WorkingPile(props) {
 
@@ -17,16 +17,12 @@ function WorkingPile(props) {
   );
 
   function renderCard(card, mapIndex){
-
-    const cardStyle = {
-      marginLeft: "-40px"
-    };
-    
     return(<Card 
       Index={card.Index} 
       Suit={card.Suit}
       Key={mapIndex}
-      OverrideStyle={cardStyle} />);
+      MarginLeft="-40px"
+      ZIndex={mapIndex} />);
   }
 }
 

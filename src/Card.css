@@ -8,3 +8,19 @@
   border-radius: 5px;
   padding: 1px 5px;
 }
+
+.CardIndexColumn{
+  width: 12px;
+}
+
+.CardIndexColumn.Reverse{
+  display: flex;
+  flex-direction: column-reverse;
+  width: 100%;
+  align-items: flex-end;
+}
+
+.CardIndexColumn.Reverse > div,
+.CardIndexColumn.Reverse > span {
+  transform: rotate(180deg);
+}
