@@ -1,9 +1,12 @@
 import './App.css';
 import background_green from './resources/background-green.png';
-import Deck from './Deck';
-import Board from './Board';
+import Deck from './components/Deck';
+import Board from './components/Board';
 
 function App() {
+
+
+
   return (
     <div className="App"
     style={{

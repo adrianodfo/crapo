@@ -1,5 +1,5 @@
 import './CardPile.css';
-import cardback from './resources/cardback.png';
+import cardback from '../resources/cardback.png';
 
 function CardPile() {
   return (
