@@ -4,58 +4,51 @@ class Game {
     computerCrapo;
     userCrapo;
     workingPiles;
+    computarPile;
+    userPile;
 
     constructor() {
         let playingCards = this.BuildPlayingCards();
-        this.computerCrapo = this.InitialiseCrapo(playingCards);
-        this.userCrapo = this.InitialiseCrapo(playingCards);
-        this.workingPiles = this.InitiliseWorkingPiles(playingCards);
+        this.computerCrapo = playingCards.slice(0, 13);
+        this.userCrapo = playingCards.slice(13, 26);
+        this.computarPile = playingCards.slice(26, 61)
+        this.userPile = playingCards.slice(61, 96);
+        this.workingPiles = this.InitiliseWorkingPiles(playingCards.slice(96, 104));
     }
 
     BuildPlayingCards = () => {
+        function Scramble(playingCards) {
+            let playingCardsLength = playingCards.length;
+            for (var i = 0; i < playingCardsLength; i++) {
+                let randomIndex = Math.floor(Math.random() * (playingCardsLength - 1));
+                if (randomIndex != i) {
+                    let tempCard = playingCards[randomIndex];
+                    playingCards[randomIndex] = playingCards[i];
+                    playingCards[i] = tempCard;
+                }
+            }
+            return playingCards;
+        }
+
         let cardIndexes = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
         let playingCards = [];
         cardIndexes.forEach(cardIndex => {
             Object.keys(Suits).forEach(key => {
-                let card = { Index: cardIndex, Suit: Suits[key], Avail: true };
+                let card = { Index: cardIndex, Suit: Suits[key], IsAvail: true };
                 playingCards.push(card);
                 playingCards.push(card);
             });
         });
-        return playingCards;
-    }
-
-    InitialiseCrapo = (playingCards) => {
-        let crapo = [];
-        let crapoCount = 0;
-        while (crapoCount < 13) {
-            let randomIndex = Math.floor(Math.random() * 103);
-            let candidateCard = playingCards[randomIndex];
-            if (candidateCard.Avail) {
-                crapo.push({ Index: candidateCard.Index, Suit: candidateCard.Suit });
-                candidateCard.Avail = false;
-                crapoCount++;
-            }
-        }
-        return crapo;
+        return Scramble(playingCards);
     }
 
     InitiliseWorkingPiles = (playingCards) => {
         let workingPiles = [];
-
         for (var i = 0; i < 8; i++) {
             let workingPile = [];
-            let randomIndex = Math.floor(Math.random() * 103);
-            let candidateCard = playingCards[randomIndex];
-            while (!candidateCard.Avail) {
-                randomIndex = Math.floor(Math.random() * 103);
-                candidateCard = playingCards[randomIndex];
-            }
-            workingPile.push({ Index: candidateCard.Index, Suit: candidateCard.Suit });
-            candidateCard.Avail = false;
+            workingPile.push({ Index: playingCards[i].Index, Suit: playingCards[i].Suit });
             workingPiles.push(workingPile);
         }
-
         return workingPiles;
     }
 }
