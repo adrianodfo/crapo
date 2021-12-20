@@ -21,11 +21,9 @@ class Game {
             let playingCardsLength = playingCards.length;
             for (var i = 0; i < playingCardsLength; i++) {
                 let randomIndex = Math.floor(Math.random() * (playingCardsLength - 1));
-                if (randomIndex != i) {
-                    let tempCard = playingCards[randomIndex];
-                    playingCards[randomIndex] = playingCards[i];
-                    playingCards[i] = tempCard;
-                }
+                let tempCard = playingCards[randomIndex];
+                playingCards[randomIndex] = playingCards[i];
+                playingCards[i] = tempCard;
             }
             return playingCards;
         }
