@@ -2,11 +2,12 @@ import { Suits } from '../components/Card';
 
 class Game {
     computerCrapo;
-    userCrapo;
-    workingPiles;
     computarPile;
+    computerDiscard;
+    userCrapo;
     userPile;
-
+    userDiscard;
+    workingPiles;
     constructor() {
         let playingCards = this.BuildPlayingCards();
         this.computerCrapo = playingCards.slice(0, 13);
@@ -14,8 +15,9 @@ class Game {
         this.computarPile = playingCards.slice(26, 61)
         this.userPile = playingCards.slice(61, 96);
         this.workingPiles = this.InitiliseWorkingPiles(playingCards.slice(96, 104));
+        this.computerDiscard = [];
+        this.userDiscard = [];
     }
-
     BuildPlayingCards = () => {
         function Scramble(playingCards) {
             let playingCardsLength = playingCards.length;
@@ -27,7 +29,6 @@ class Game {
             }
             return playingCards;
         }
-
         let cardIndexes = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
         let playingCards = [];
         cardIndexes.forEach(cardIndex => {
@@ -39,7 +40,6 @@ class Game {
         });
         return Scramble(playingCards);
     }
-
     InitiliseWorkingPiles = (playingCards) => {
         let workingPiles = [];
         for (var i = 0; i < 8; i++) {

@@ -1,25 +1,18 @@
 import "./BoardRow.css";
 import WorkingPile from "./WorkingPile";
 import Stack from "./Stack";
-import {Suits} from "./Card";
 
-function BoardRow() {
-
-  let cards = [ 
-    {Index: 9, Suit: Suits.Diamond},
-    {Index: 8, Suit: Suits.Club},
-    {Index: 7, Suit: Suits.Heart},
-    {Index: 6, Suit: Suits.Spade}
-  ];
-
+function BoardRow(props) {
+  let leftPile = props.WorkingPiles[0];
+  let rightPile = props.WorkingPiles[1];
   return (
       <div className="BoardRow">
         <div class="BoardColumn Left">
-          <WorkingPile Cards={cards} />
-          <Stack Index="A" Suit={Suits.Heart} />
+          <WorkingPile Cards={leftPile} />
+          <Stack />
         </div>
         <div class="BoardColumn Right">
-          <WorkingPile  Cards={cards}/>
+          <WorkingPile  Cards={rightPile}/>
           <Stack />
         </div>
       </div>
