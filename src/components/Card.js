@@ -1,26 +1,30 @@
 import "./Card.css";
+import Drag from '../dragAndDrop/Drag';
+import Drop from '../dragAndDrop/Drop';
 
 export function Card(props) {
-
   var color = (props.Suit == Suits.Club || props.Suit == Suits.Spade) ? "black" : "red";
-
   const cardStyle = {
-    marginLeft: props.MarginLeft? props.MarginLeft : 0,
+    marginLeft: props.MarginLeft ? props.MarginLeft : 0,
     zIndex: props.ZIndex,
     color: color
-  };  
-
+  };
+  const itemDropped = item => alert(item.Index + " " + item.Suit);
   return (
-    <div className="Card" style={cardStyle}>
-      <div className="CardIndexColumn">
-        <span>{props.Index}</span>
-        <div>{props.Suit}</div>
-      </div>
-      <div className="CardIndexColumn Reverse">
-        <span>{props.Index}</span>
-        <div>{props.Suit}</div>
-      </div>
-    </div>
+    <Drag dataItem={{ Index: props.Index, Suit: props.Suit }}>
+      <Drop onItemDropped={itemDropped}>
+        <div className="Card" style={cardStyle}>
+          <div className="CardIndexColumn">
+            <span>{props.Index}</span>
+            <div>{props.Suit}</div>
+          </div>
+          <div className="CardIndexColumn Reverse">
+            <span>{props.Index}</span>
+            <div>{props.Suit}</div>
+          </div>
+        </div>
+      </Drop>
+    </Drag>
   );
 }
 
@@ -31,4 +35,3 @@ export const Suits =
   Heart: "\u2665",
   Diamond: "\u2666"
 };
-
