@@ -21,7 +21,6 @@ function WorkingPile(props) {
       Index={card.Index} 
       Suit={card.Suit}
       Key={mapIndex}
-      MarginLeft="-40px"
       ZIndex={mapIndex} />);
   }
 }

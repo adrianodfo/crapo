@@ -5,7 +5,7 @@
   margin: 10px;
 }
 
-.Deck div{
+.Deck >div{
   margin-right: 10px;
 }
 
