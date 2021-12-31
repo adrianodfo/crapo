@@ -4,3 +4,6 @@
   margin-left: 50px;
 }
 
+.WorkingPile >div{
+  margin-left: -40px;
+}
