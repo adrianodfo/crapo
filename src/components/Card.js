@@ -8,10 +8,10 @@ export function Card(props) {
     zIndex: props.ZIndex,
     color: color
   };
-  const itemDropped = item => alert(item.Index + " " + item.Suit);
+  const itemDropped = item => {alert(item.Index + " " + item.Suit); }
   return (
     <Drag dataItem={{ Index: props.Index, Suit: props.Suit }}>
-      <Drop onItemDropped={itemDropped}>
+      <Drop onDropped={itemDropped}>
         <div className="Card" style={cardStyle}>
           <div className="CardIndexColumn">
             <span>{props.Index}</span>

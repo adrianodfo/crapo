@@ -5,7 +5,7 @@ const Drop = props => {
     const drop = evnt => {
         const droppedItem = evnt.dataTransfer.getData("drag-item");
         if (droppedItem) {
-            props.onItemDropped(droppedItem);
+            props.onDropped(droppedItem);
         }
     };
 
