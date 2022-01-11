@@ -8,7 +8,7 @@ const Drag = props => {
     const [isDragging, setIsDragging] = React.useState(false);
     const DragStart = evnt => {
         setIsDragging(true);
-        evnt.dataTransfer.setData("drag-item", props.dataItem);
+        evnt.dataTransfer.setData("text/plain", JSON.stringify(props.dataItem));
     }
     const DragEnd = () => setIsDragging(false);
     return (

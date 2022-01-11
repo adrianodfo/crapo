@@ -3,12 +3,11 @@ const Drop = props => {
         evnt.preventDefault();
     };
     const drop = evnt => {
-        const droppedItem = evnt.dataTransfer.getData("drag-item");
-        if (droppedItem) {
-            props.onDropped(droppedItem);
+        const dragData = JSON.parse(evnt.dataTransfer.getData("text/plain"));
+        if (dragData) {
+            props.onDropped(dragData);
         }
     };
-
     return (
         <div
             onDragOver={dragOver}

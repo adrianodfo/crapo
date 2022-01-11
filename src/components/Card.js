@@ -3,12 +3,12 @@ import Drag from '../dragAndDrop/Drag';
 import Drop from '../dragAndDrop/Drop';
 
 export function Card(props) {
-  var color = (props.Suit == Suits.Club || props.Suit == Suits.Spade) ? "black" : "red";
+  const color = (props.Suit == Suits.Club || props.Suit == Suits.Spade) ? "black" : "red";
   const cardStyle = {
     zIndex: props.ZIndex,
     color: color
   };
-  const itemDropped = item => {alert(item.Index + " " + item.Suit); }
+  const itemDropped = item => { alert(item.Index + " " + item.Suit); }
   return (
     <Drag dataItem={{ Index: props.Index, Suit: props.Suit }}>
       <Drop onDropped={itemDropped}>
