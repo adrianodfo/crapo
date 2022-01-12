@@ -1,27 +1,26 @@
 import "./WorkingPile.css";
-import {Card, Suits} from "./Card";
+import Drag from '../dragAndDrop/Drag';
+import Drop from '../dragAndDrop/Drop';
+import { Card, Suits } from "./Card";
 
 function WorkingPile(props) {
-
-  var cards;
-
-  if(props.Cards)
-  {
+  let cards;
+  const itemDropped = item => { alert(item.Index + " " + item.Suit); }
+  if (props.Cards) {
     cards = (props.Cards.map((card, mapIndex) => renderCard(card, mapIndex)));
   }
-
   return (
-      <div className="WorkingPile">
+    <div className="WorkingPile">
       {cards}
-      </div>
+    </div>
   );
-
-  function renderCard(card, mapIndex){
-    return(<Card 
-      Index={card.Index} 
-      Suit={card.Suit}
-      Key={mapIndex}
-      ZIndex={mapIndex} />);
+  function renderCard(card, mapIndex) {
+    return (
+      <Drag dataItem={{ Index: card.Index, Suit: card.Suit }}>
+        <Drop onDropped={itemDropped}>
+          <Card Index={card.Index} Suit={card.Suit} Key={mapIndex} ZIndex={mapIndex} />
+        </Drop>
+      </Drag>);
   }
 }
 
