@@ -3,9 +3,17 @@ import background_green from './resources/background-green.png';
 import Deck from './components/Deck';
 import Board from './components/Board';
 import Game from './game/game';
+import { useState } from 'react';
 
-function App() {
+export default function App() {
   const game = new Game();
+  const [computarPile, setComputarPile] = useState(game.computarPile);
+  const [computerDiscard, setComputerDiscard] = useState(game.computerDiscard);
+  const [computerCrapo, setComputarCrapo] = useState(game.computerCrapo);
+  const [workingPiles, setWorkingPiles] = useState(game.workingPiles);
+  const [userPile, setUserPile] = useState(game.userPile);
+  const [userDiscard, setUserDiscard] = useState(game.userDiscard);
+  const [userCrapo, setUserCrapo] = useState(game.userCrapo);
   return (
     <div className="App"
       style={{
@@ -13,11 +21,9 @@ function App() {
         backgroundSize: "cover",
         height: "100vh"
       }}>
-      <Deck CardPile={game.computarPile} Discard={game.computerDiscard} Crapo={game.computerCrapo} />
-      <Board WorkingPiles={game.workingPiles}/>
-      <Deck CardPile={game.userPile} Discard={game.userDiscard} Crapo={game.userCrapo} />
+      <Deck CardPile={computarPile} Discard={computerDiscard} Crapo={computerCrapo} />
+      <Board WorkingPiles={workingPiles}/>
+      <Deck CardPile={userPile} Discard={userDiscard} Crapo={userCrapo} />
     </div>
   );
 }
-
-export default App;
