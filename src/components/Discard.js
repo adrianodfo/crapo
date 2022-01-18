@@ -1,16 +1,17 @@
 import './Discard.css';
-import {Card} from './Card';
+import { Card } from './Card';
+import Drop from '../dragAndDrop/Drop';
 
 function Discard(props) {
-
-  var isEmpty = !props.Index;
-
-  if( isEmpty )
-  {
-     return (<div className="Discard"></div>)
+  let discardLength = props.Discard.length;
+  let topCard = discardLength > 0 ? props.Discard[discardLength - 1] : {};
+  const cardDropped = (card) => {
+    props.onCardPlaced(card);
   }
-     
-  return (<Card {...props} />);
+  return (
+    <Drop onDropped={cardDropped}>
+      <Card {...topCard} />
+    </Drop>);
 }
 
 export default Discard;

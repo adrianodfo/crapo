@@ -14,6 +14,13 @@ export default function App() {
   const [userPile, setUserPile] = useState(game.userPile);
   const [userDiscard, setUserDiscard] = useState(game.userDiscard);
   const [userCrapo, setUserCrapo] = useState(game.userCrapo);
+  const onUserDiscard = (card) => {
+    setUserDiscard(previousState => {
+      let discard = previousState.slice();
+      discard.push(card);
+      return discard
+    });
+  };
   return (
     <div className="App"
       style={{
@@ -23,7 +30,9 @@ export default function App() {
       }}>
       <Deck CardPile={computarPile} Discard={computerDiscard} Crapo={computerCrapo} />
       <Board WorkingPiles={workingPiles}/>
-      <Deck CardPile={userPile} Discard={userDiscard} Crapo={userCrapo} />
+      <Deck CardPile={userPile} 
+      Discard={userDiscard} onUserDiscard={onUserDiscard}
+      Crapo={userCrapo} />
     </div>
   );
 }
