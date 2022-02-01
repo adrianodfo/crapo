@@ -7,7 +7,7 @@ function Deck(props) {
   return (
     <div className="Deck">
       <CardPile CardPile={props.CardPile} />
-      <Discard Discard={props.Discard} onCardPlaced={card => props.onUserDiscard(card)}/>
+      <Discard Discard={props.Discard} onCardPlaced={card => props.onDiscard(card)}/>
       <Crapo Crapo={props.Crapo}/>
     </div>
   );

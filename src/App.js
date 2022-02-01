@@ -18,7 +18,7 @@ export default function App() {
     setUserDiscard(previousState => {
       let discard = previousState.slice();
       discard.push(card);
-      return discard
+      return discard;
     });
   };
   return (
@@ -28,11 +28,15 @@ export default function App() {
         backgroundSize: "cover",
         height: "100vh"
       }}>
-      <Deck CardPile={computarPile} Discard={computerDiscard} Crapo={computerCrapo} />
+      <Deck
+        CardPile={computarPile}
+        Discard={computerDiscard}
+        Crapo={computerCrapo} />
       <Board WorkingPiles={workingPiles}/>
-      <Deck CardPile={userPile} 
-      Discard={userDiscard} onUserDiscard={onUserDiscard}
-      Crapo={userCrapo} />
+      <Deck 
+        CardPile={userPile} 
+        Discard={userDiscard} onDiscard={onUserDiscard}
+        Crapo={userCrapo} />
     </div>
   );
 }
