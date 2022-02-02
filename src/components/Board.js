@@ -1,19 +1,50 @@
 import './Board.css';
-import BoardRow from './BoardRow';
+import WorkingPile from "./WorkingPile";
+import Stack from "./Stack";
 
-function Board(props) {
-  let row1Piles = props.WorkingPiles.slice(0,2);
-  let row2Piles = props.WorkingPiles.slice(2,4);
-  let row3Piles = props.WorkingPiles.slice(4,6);
-  let row4Piles = props.WorkingPiles.slice(6,8);
+export default function Board(props) {
   return (
     <div className="Board">
-      <BoardRow WorkingPiles={row1Piles}/>
-      <BoardRow WorkingPiles={row2Piles}/>
-      <BoardRow WorkingPiles={row3Piles}/>
-      <BoardRow WorkingPiles={row4Piles}/>
+      <div className="BoardRow">
+        <div class="BoardColumn Left">
+          <WorkingPile Cards={props.WorkingPiles[0]} />
+          <Stack />
+        </div>
+        <div class="BoardColumn Right">
+          <WorkingPile Cards={props.WorkingPiles[1]} />
+          <Stack />
+        </div>
+      </div>
+      <div className="BoardRow">
+        <div class="BoardColumn Left">
+          <WorkingPile Cards={props.WorkingPiles[2]} />
+          <Stack />
+        </div>
+        <div class="BoardColumn Right">
+          <WorkingPile Cards={props.WorkingPiles[3]} />
+          <Stack />
+        </div>
+      </div>
+      <div className="BoardRow">
+        <div class="BoardColumn Left">
+          <WorkingPile Cards={props.WorkingPiles[4]} />
+          <Stack />
+        </div>
+        <div class="BoardColumn Right">
+          <WorkingPile Cards={props.WorkingPiles[5]} />
+          <Stack />
+        </div>
+      </div>
+      <div className="BoardRow">
+        <div class="BoardColumn Left">
+          <WorkingPile Cards={props.WorkingPiles[6]} />
+          <Stack />
+        </div>
+        <div class="BoardColumn Right">
+          <WorkingPile Cards={props.WorkingPiles[7]} />
+          <Stack />
+        </div>
+      </div>
     </div>
   );
 }
-
-export default Board;

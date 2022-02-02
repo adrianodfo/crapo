@@ -1,7 +1,7 @@
 import "./Card.css";
 
 export function Card(props) {
-  const color = (props.Suit == Suits.Club || props.Suit == Suits.Spade) ? "black" : "red";
+  const color = (props.Suit === Suits.Club || props.Suit === Suits.Spade) ? "black" : "red";
   const cardStyle = {
     zIndex: props.ZIndex,
     color: color

@@ -1,7 +1,7 @@
 import "./WorkingPile.css";
 import Drag from '../dragAndDrop/Drag';
 import Drop from '../dragAndDrop/Drop';
-import { Card, Suits } from "./Card";
+import { Card } from "./Card";
 
 function WorkingPile(props) {
   let cards;
