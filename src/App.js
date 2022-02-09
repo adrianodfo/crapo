@@ -5,12 +5,6 @@ import Board from './components/Board';
 import Game from './game/game';
 import { useState } from 'react';
 
-function processDiscard(previousState, card) {
-  let discard = previousState.slice();
-  discard.push(card);
-  return discard;
-}
-
 export default function App() {
   const game = new Game();
   const [computarPile, setComputarPile] = useState(game.computarPile);
@@ -20,11 +14,27 @@ export default function App() {
   const [userPile, setUserPile] = useState(game.userPile);
   const [userDiscard, setUserDiscard] = useState(game.userDiscard);
   const [userCrapo, setUserCrapo] = useState(game.userCrapo);
-  const onUserDiscard = (card) => {
-    setUserDiscard(previousState => processDiscard(previousState, card));
+  const onUserDiscard = (droppedCard) => {
+    setUserDiscard(previousState => processDiscard(previousState, droppedCard));
   };
-  const onComputerDiscard = (card) => {
-    setComputerDiscard(previousState => processDiscard(previousState, card));
+  const onComputerDiscard = (droppedCard) => {
+    setComputerDiscard(previousState => processDiscard(previousState, droppedCard));
+  };
+  const removeCardFromOrigin = (droppedCard) => {
+    if (droppedCard.Origin === "WorkingPile") {
+      let originIndex = droppedCard.OriginIndex;
+      setWorkingPiles(previousState => {
+        let workingPiles = previousState.slice();
+        workingPiles[originIndex].splice(-1, 1);
+        return workingPiles;
+      });
+    }
+  };
+  const processDiscard = (previousState, droppedCard) => {
+    let discard = previousState.slice();
+    discard.push(droppedCard.Card);
+    removeCardFromOrigin(droppedCard);
+    return discard;
   };
   return (
     <div className="App"

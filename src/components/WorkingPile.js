@@ -5,7 +5,7 @@ import { Card } from "./Card";
 
 function WorkingPile(props) {
   let cards;
-  const itemDropped = item => { alert(item.Index + " " + item.Suit); }
+  const itemDropped = item => { /* todo */ }
   if (props.Cards) {
     cards = (props.Cards.map((card, mapIndex) => renderCard(card, mapIndex)));
   }
@@ -16,7 +16,13 @@ function WorkingPile(props) {
   );
   function renderCard(card, mapIndex) {
     return (
-      <Drag dataItem={{ Index: card.Index, Suit: card.Suit }}>
+      <Drag dataItem={
+        {
+          Card: { Index: card.Index, Suit: card.Suit },
+          Origin: "WorkingPile",
+          OriginIndex: props.WorkingPileIndex
+        }
+      }>
         <Drop onDropped={itemDropped}>
           <Card Index={card.Index} Suit={card.Suit} Key={mapIndex} ZIndex={mapIndex} />
         </Drop>
