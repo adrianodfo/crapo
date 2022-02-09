@@ -5,6 +5,12 @@ import Board from './components/Board';
 import Game from './game/game';
 import { useState } from 'react';
 
+function processDiscard(previousState, card) {
+  let discard = previousState.slice();
+  discard.push(card);
+  return discard;
+}
+
 export default function App() {
   const game = new Game();
   const [computarPile, setComputarPile] = useState(game.computarPile);
@@ -15,11 +21,10 @@ export default function App() {
   const [userDiscard, setUserDiscard] = useState(game.userDiscard);
   const [userCrapo, setUserCrapo] = useState(game.userCrapo);
   const onUserDiscard = (card) => {
-    setUserDiscard(previousState => {
-      let discard = previousState.slice();
-      discard.push(card);
-      return discard;
-    });
+    setUserDiscard(previousState => processDiscard(previousState, card));
+  };
+  const onComputerDiscard = (card) => {
+    setComputerDiscard(previousState => processDiscard(previousState, card));
   };
   return (
     <div className="App"
@@ -30,11 +35,11 @@ export default function App() {
       }}>
       <Deck
         CardPile={computarPile}
-        Discard={computerDiscard}
+        Discard={computerDiscard} onDiscard={onComputerDiscard}
         Crapo={computerCrapo} />
-      <Board WorkingPiles={workingPiles}/>
-      <Deck 
-        CardPile={userPile} 
+      <Board WorkingPiles={workingPiles} />
+      <Deck
+        CardPile={userPile}
         Discard={userDiscard} onDiscard={onUserDiscard}
         Crapo={userCrapo} />
     </div>
