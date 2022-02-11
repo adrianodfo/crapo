@@ -4,6 +4,7 @@ import Stack from "./Stack";
 
 export default function Board(props) {
   return (
+    //TODO: is it possible to eliminate Board and BoardRow?
     <div className="Board">
       <div className="BoardRow">
         <div class="BoardColumn Left">
