@@ -7,9 +7,9 @@ import { useState } from 'react';
 
 export default function App() {
   const game = new Game();
-  const [computarPile, setComputarPile] = useState(game.computarPile);
+  const [computerPile, setComputerPile] = useState(game.computarPile);
   const [computerDiscard, setComputerDiscard] = useState(game.computerDiscard);
-  const [computerCrapo, setComputarCrapo] = useState(game.computerCrapo);
+  const [computerCrapo, setComputerCrapo] = useState(game.computerCrapo);
   const [workingPiles, setWorkingPiles] = useState(game.workingPiles);
   const [userPile, setUserPile] = useState(game.userPile);
   const [userDiscard, setUserDiscard] = useState(game.userDiscard);
@@ -21,13 +21,32 @@ export default function App() {
     setComputerDiscard(previousState => processDiscard(previousState, droppedCard));
   };
   const removeCardFromOrigin = (droppedCard) => {
-    if (droppedCard.Origin === "WorkingPile") {
-      let originIndex = droppedCard.OriginIndex;
+    switch(droppedCard.Origin)
+    {
+    case "WorkingPile":
       setWorkingPiles(previousState => {
         let workingPiles = previousState.slice();
-        workingPiles[originIndex].splice(-1, 1);
+        workingPiles[droppedCard.OriginIndex].splice(-1, 1);
         return workingPiles;
       });
+      break;
+    case "Crapo":
+      //todo: OriginIndex="0" means computer. Need to find a better way
+      //todo: extract new crapo to a common method.
+      if( droppedCard.OriginIndex == 0 )  {
+        setComputerCrapo(previousState => {
+          let newCrapo= previousState.slice();
+          newCrapo.splice(-1,1);
+          return newCrapo;
+        });
+      }
+      else{
+        setUserCrapo(previousState => {
+          let newCrapo= previousState.slice();
+          newCrapo.splice(-1,1);
+          return newCrapo;
+        });
+      }
     }
   };
   const processDiscard = (previousState, droppedCard) => {
@@ -44,14 +63,14 @@ export default function App() {
         height: "100vh"
       }}>
       <Deck
-        CardPile={computarPile}
+        CardPile={computerPile}
         Discard={computerDiscard} onDiscard={onComputerDiscard}
-        Crapo={computerCrapo} />
+        Crapo={computerCrapo} OriginIndex="0"/>
       <Board WorkingPiles={workingPiles} />
       <Deck
         CardPile={userPile}
         Discard={userDiscard} onDiscard={onUserDiscard}
-        Crapo={userCrapo} />
+        Crapo={userCrapo} OriginIndex="1"/>
     </div>
   );
 }

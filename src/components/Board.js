@@ -8,41 +8,41 @@ export default function Board(props) {
     <div className="Board">
       <div className="BoardRow">
         <div class="BoardColumn Left">
-          <WorkingPile Cards={props.WorkingPiles[0]} WorkingPileIndex="0" />
+          <WorkingPile Cards={props.WorkingPiles[0]} OriginIndex="0" />
           <Stack />
         </div>
         <div class="BoardColumn Right">
-          <WorkingPile Cards={props.WorkingPiles[1]} WorkingPileIndex="1" />
+          <WorkingPile Cards={props.WorkingPiles[1]} OriginIndex="1" />
           <Stack />
         </div>
       </div>
       <div className="BoardRow">
         <div class="BoardColumn Left">
-          <WorkingPile Cards={props.WorkingPiles[2]} WorkingPileIndex="2"/>
+          <WorkingPile Cards={props.WorkingPiles[2]} OriginIndex="2"/>
           <Stack />
         </div>
         <div class="BoardColumn Right">
-          <WorkingPile Cards={props.WorkingPiles[3]} WorkingPileIndex="3" />
+          <WorkingPile Cards={props.WorkingPiles[3]} OriginIndex="3" />
           <Stack />
         </div>
       </div>
       <div className="BoardRow">
         <div class="BoardColumn Left">
-          <WorkingPile Cards={props.WorkingPiles[4]} WorkingPileIndex="4"/>
+          <WorkingPile Cards={props.WorkingPiles[4]} OriginIndex="4"/>
           <Stack />
         </div>
         <div class="BoardColumn Right">
-          <WorkingPile Cards={props.WorkingPiles[5]} WorkingPileIndex="5"/>
+          <WorkingPile Cards={props.WorkingPiles[5]} OriginIndex="5"/>
           <Stack />
         </div>
       </div>
       <div className="BoardRow">
         <div class="BoardColumn Left">
-          <WorkingPile Cards={props.WorkingPiles[6]} WorkingPileIndex="6"/>
+          <WorkingPile Cards={props.WorkingPiles[6]} OriginIndex="6"/>
           <Stack />
         </div>
         <div class="BoardColumn Right">
-          <WorkingPile Cards={props.WorkingPiles[7]} WorkingPileIndex="7"/>
+          <WorkingPile Cards={props.WorkingPiles[7]} OriginIndex="7"/>
           <Stack />
         </div>
       </div>

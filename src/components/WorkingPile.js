@@ -20,7 +20,7 @@ function WorkingPile(props) {
         {
           Card: { Index: card.Index, Suit: card.Suit },
           Origin: "WorkingPile",
-          OriginIndex: props.WorkingPileIndex
+          OriginIndex: props.OriginIndex
         }
       }>
         <Drop onDropped={itemDropped}>

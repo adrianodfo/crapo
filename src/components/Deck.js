@@ -8,7 +8,7 @@ function Deck(props) {
     <div className="Deck">
       <CardPile CardPile={props.CardPile} />
       <Discard Discard={props.Discard} onCardPlaced={card => props.onDiscard(card)}/>
-      <Crapo Crapo={props.Crapo}/>
+      <Crapo Crapo={props.Crapo} OriginIndex={props.OriginIndex}/>
     </div>
   );
 }
