@@ -20,6 +20,9 @@ export default function App() {
   const onComputerDiscard = (droppedCard) => {
     setComputerDiscard(previousState => processDiscard(previousState, droppedCard));
   };
+  const onWorkingPile = (droppedCard, targetIndex) => {
+    setWorkingPiles(previousState => processWorkingPiles(previousState, droppedCard, targetIndex));
+  };
   const removeCardFromOrigin = (droppedCard) => {
     switch(droppedCard.Origin)
     {
@@ -55,6 +58,12 @@ export default function App() {
     removeCardFromOrigin(droppedCard);
     return discard;
   };
+  const processWorkingPiles = (previousState, droppedCard, targetIndex) => {
+    let workingPiles = previousState.slice();
+    workingPiles[targetIndex].push(droppedCard.Card);
+    removeCardFromOrigin(droppedCard);
+    return workingPiles;
+  };
   return (
     <div className="App"
       style={{
@@ -66,7 +75,7 @@ export default function App() {
         CardPile={computerPile}
         Discard={computerDiscard} onDiscard={onComputerDiscard}
         Crapo={computerCrapo} OriginIndex="0"/>
-      <Board WorkingPiles={workingPiles} />
+      <Board WorkingPiles={workingPiles} onCardPlaced={onWorkingPile} />
       <Deck
         CardPile={userPile}
         Discard={userDiscard} onDiscard={onUserDiscard}
