@@ -26,7 +26,7 @@ function WorkingPile(props) {
         }
       }>
         <Drop onDropped={cardDropped}>
-          <Card Index={card.Index} Suit={card.Suit} Key={mapIndex} ZIndex={mapIndex} />
+          <Card Index={card.Index} Suit={card.Suit} Key={mapIndex} />
         </Drop>
       </Drag>);
   }

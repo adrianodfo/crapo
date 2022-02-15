@@ -7,3 +7,11 @@
 .WorkingPile >div{
   margin-left: -40px;
 }
+
+.Left .WorkingPile{
+    flex-direction: row-reverse;
+}
+
+.Right .WorkingPile .Card{
+  transform: rotate(360deg);
+}
