@@ -1,28 +1,21 @@
 .Board {
-  flex: 8;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  flex-flow: row wrap;
+  align-content: space-between;
+  justify-content: center;
 }
 
-.BoardRow {
+.Board>div {
+  display: contents;
   display: flex;
-  flex-direction: row;
+  width: 40%;
 }
 
-.BoardRow .BoardColumn {
-  flex: 1;
-  display: flex;
-  margin-left: 10px;
-  margin-right: 10px;
+.Board>div:nth-child(even){
+ flex-flow: row-reverse;
+ justify-content: start;
 }
 
-.BoardRow .BoardColumn.Left {
-  flex-direction: row;
-  justify-content: flex-end;
-}
-
-.BoardRow .BoardColumn.Right {
-  flex-direction: row-reverse;
-  justify-content: flex-end;
+.Board>div:nth-child(odd){
+  justify-content: end;
 }
