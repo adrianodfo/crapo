@@ -7,18 +7,24 @@ import { useState } from 'react';
 
 export default function App() {
   const game = new Game();
-  const [computerPile, setComputerPile] = useState(game.computarPile);
+  const [computerPile, setComputerPile] = useState(game.computerPile);
   const [computerDiscard, setComputerDiscard] = useState(game.computerDiscard);
   const [computerCrapo, setComputerCrapo] = useState(game.computerCrapo);
   const [workingPiles, setWorkingPiles] = useState(game.workingPiles);
   const [userPile, setUserPile] = useState(game.userPile);
   const [userDiscard, setUserDiscard] = useState(game.userDiscard);
   const [userCrapo, setUserCrapo] = useState(game.userCrapo);
+  const onComputerDiscard = (droppedCard) => {
+    setComputerDiscard(previousState => processDiscard(previousState, droppedCard));
+  };
+  const onComputerCrapo = (droppedCard) => {
+    setComputerCrapo(previousState => processCrapo(previousState, droppedCard));
+  };
   const onUserDiscard = (droppedCard) => {
     setUserDiscard(previousState => processDiscard(previousState, droppedCard));
   };
-  const onComputerDiscard = (droppedCard) => {
-    setComputerDiscard(previousState => processDiscard(previousState, droppedCard));
+  const onUserCrapo = (droppedCard) => {
+    setUserCrapo(previousState => processCrapo(previousState, droppedCard));
   };
   const onWorkingPile = (droppedCard, targetIndex) => {
     setWorkingPiles(previousState => processWorkingPiles(previousState, droppedCard, targetIndex));
@@ -36,7 +42,7 @@ export default function App() {
     case "Crapo":
       //todo: OriginIndex="0" means computer. Need to find a better way
       //todo: extract new crapo to a common method.
-      if( droppedCard.OriginIndex == 0 )  {
+      if( droppedCard.OriginIndex === "0" )  {
         setComputerCrapo(previousState => {
           let newCrapo= previousState.slice();
           newCrapo.splice(-1,1);
@@ -50,7 +56,16 @@ export default function App() {
           return newCrapo;
         });
       }
+      break;
+    default:
+      break;
     }
+  };
+  const processCrapo = (previousState, droppedCard) => {
+    let crapo = previousState.slice();
+    crapo.push(droppedCard.Card);
+    removeCardFromOrigin(droppedCard);
+    return crapo;
   };
   const processDiscard = (previousState, droppedCard) => {
     let discard = previousState.slice();
@@ -74,12 +89,14 @@ export default function App() {
       <Deck
         CardPile={computerPile}
         Discard={computerDiscard} onDiscard={onComputerDiscard}
-        Crapo={computerCrapo} OriginIndex="0"/>
+        Crapo={computerCrapo} onCrapo={onComputerCrapo}
+        OriginIndex="0" DropTarget="0"/>
       <Board WorkingPiles={workingPiles} onCardPlaced={onWorkingPile} />
       <Deck
         CardPile={userPile}
         Discard={userDiscard} onDiscard={onUserDiscard}
-        Crapo={userCrapo} OriginIndex="1"/>
+        Crapo={userCrapo} onCrapo={onUserCrapo}
+        OriginIndex="1" DropTarget="1"/>
     </div>
   );
 }

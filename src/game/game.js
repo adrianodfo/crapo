@@ -2,7 +2,7 @@ import { Suits } from '../components/Card';
 
 class Game {
     computerCrapo;
-    computarPile;
+    computerPile;
     computerDiscard;
     userCrapo;
     userPile;
@@ -12,7 +12,7 @@ class Game {
         let playingCards = this.BuildPlayingCards();
         this.computerCrapo = playingCards.slice(0, 13);
         this.userCrapo = playingCards.slice(13, 26);
-        this.computarPile = playingCards.slice(26, 61)
+        this.computerPile = playingCards.slice(26, 61);
         this.userPile = playingCards.slice(61, 96);
         this.workingPiles = this.InitiliseWorkingPiles(playingCards.slice(96, 104));
         this.computerDiscard = [];

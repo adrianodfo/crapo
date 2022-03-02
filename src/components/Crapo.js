@@ -10,7 +10,9 @@ function Crapo(props) {
     let topCard = props.Crapo[props.Crapo.length - 1];
     card = { Index: topCard.Index, Suit: topCard.Suit };
   }
-  const itemDropped = item => { /* todo */ }
+  const cardDropped = (droppedCard) => {
+    props.onCardPlaced(droppedCard, props.DropTarget);
+  }
   return hasCard ?
     (<div className="Crapo">
       <Drag dataItem={
@@ -20,7 +22,7 @@ function Crapo(props) {
           OriginIndex: props.OriginIndex
         }
       }>
-        <Drop onDropped={itemDropped}>
+        <Drop onDropped={cardDropped}>
           <Card Index={card.Index} Suit={card.Suit} />
         </Drop>
       </Drag>
