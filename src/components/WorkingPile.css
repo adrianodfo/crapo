@@ -8,10 +8,10 @@
   margin-left: -40px;
 }
 
-.Left .WorkingPile{
-    flex-direction: row-reverse;
+.WorkingPile .Card{
+  transform: rotate(360deg);
 }
 
-.Right .WorkingPile .Card{
-  transform: rotate(360deg);
+.WorkingPile.Left{
+  flex-direction: row-reverse;
 }

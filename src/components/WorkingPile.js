@@ -11,8 +11,12 @@ function WorkingPile(props) {
   if (props.Cards) {
     cards = (props.Cards.map((card, mapIndex) => renderCard(card, mapIndex)));
   }
+  let styles = "WorkingPile";
+  if (props.OriginIndex % 2 == 0) {
+    styles += " Left";
+  }
   return (
-    <div className="WorkingPile">
+    <div className={styles}>
       {cards}
     </div>
   );
