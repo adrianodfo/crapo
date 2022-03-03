@@ -7,19 +7,27 @@ export default function Board(props) {
     props.onCardPlaced(droppedCard, dropTarget);
   }
 
-  const board = props.WorkingPiles.map((element, index) => {
-    return (
-      <div>
-        <WorkingPile 
-          Cards={element}
+  const cardStacked = (stackedCard, dropTarget) => {
+    props.onCardStacked(stackedCard, dropTarget);
+  }
+
+  const board = [];
+
+  for (var index = 0; index < 8; index++) {
+    board.push((
+      <div Key={index}>
+        <WorkingPile
+          Cards={props.WorkingPiles[index]}
           OriginIndex={index}
           DropTarget={index}
-          onCardPlaced={cardDropped}
-          Key={index} />
-        <Stack />
+          onCardPlaced={cardDropped} />
+        <Stack
+          TopCard={props.Stacks[index]}
+          onCardPlaced={cardStacked}
+          DropTarget={index} />
       </div>
-    );
-  });
+    ));
+  }
 
   return <div className="Board">
     {board}

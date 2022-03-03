@@ -8,6 +8,7 @@ class Game {
     userPile;
     userDiscard;
     workingPiles;
+    stacks;
     constructor() {
         let playingCards = this.BuildPlayingCards();
         this.computerCrapo = playingCards.slice(0, 13);
@@ -17,6 +18,7 @@ class Game {
         this.workingPiles = this.InitiliseWorkingPiles(playingCards.slice(96, 104));
         this.computerDiscard = [];
         this.userDiscard = [];
+        this.stacks = new Array(8);
     }
     BuildPlayingCards = () => {
         function Scramble(playingCards) {

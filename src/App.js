@@ -11,6 +11,7 @@ export default function App() {
   const [computerDiscard, setComputerDiscard] = useState(game.computerDiscard);
   const [computerCrapo, setComputerCrapo] = useState(game.computerCrapo);
   const [workingPiles, setWorkingPiles] = useState(game.workingPiles);
+  const [stacks, setStacks] = useState(game.stacks);
   const [userPile, setUserPile] = useState(game.userPile);
   const [userDiscard, setUserDiscard] = useState(game.userDiscard);
   const [userCrapo, setUserCrapo] = useState(game.userCrapo);
@@ -29,36 +30,38 @@ export default function App() {
   const onWorkingPile = (droppedCard, targetIndex) => {
     setWorkingPiles(previousState => processWorkingPiles(previousState, droppedCard, targetIndex));
   };
+  const onStack= (droppedCard, targetIndex) => {
+    setStacks(previousState => processStacks(previousState, droppedCard, targetIndex));
+  };
   const removeCardFromOrigin = (droppedCard) => {
-    switch(droppedCard.Origin)
-    {
-    case "WorkingPile":
-      setWorkingPiles(previousState => {
-        let workingPiles = previousState.slice();
-        workingPiles[droppedCard.OriginIndex].splice(-1, 1);
-        return workingPiles;
-      });
-      break;
-    case "Crapo":
-      //todo: OriginIndex="0" means computer. Need to find a better way
-      //todo: extract new crapo to a common method.
-      if( droppedCard.OriginIndex === "0" )  {
-        setComputerCrapo(previousState => {
-          let newCrapo= previousState.slice();
-          newCrapo.splice(-1,1);
-          return newCrapo;
+    switch (droppedCard.Origin) {
+      case "WorkingPile":
+        setWorkingPiles(previousState => {
+          let workingPiles = previousState.slice();
+          workingPiles[droppedCard.OriginIndex].splice(-1, 1);
+          return workingPiles;
         });
-      }
-      else{
-        setUserCrapo(previousState => {
-          let newCrapo= previousState.slice();
-          newCrapo.splice(-1,1);
-          return newCrapo;
-        });
-      }
-      break;
-    default:
-      break;
+        break;
+      case "Crapo":
+        //todo: OriginIndex="0" means computer. Need to find a better way
+        //todo: extract new crapo to a common method.
+        if (droppedCard.OriginIndex === "0") {
+          setComputerCrapo(previousState => {
+            let newCrapo = previousState.slice();
+            newCrapo.splice(-1, 1);
+            return newCrapo;
+          });
+        }
+        else {
+          setUserCrapo(previousState => {
+            let newCrapo = previousState.slice();
+            newCrapo.splice(-1, 1);
+            return newCrapo;
+          });
+        }
+        break;
+      default:
+        break;
     }
   };
   const processCrapo = (previousState, droppedCard) => {
@@ -79,6 +82,12 @@ export default function App() {
     removeCardFromOrigin(droppedCard);
     return workingPiles;
   };
+  const processStacks = (previousState, droppedCard, targetIndex) => {
+    let stacks = previousState.slice();
+    stacks[targetIndex] = droppedCard.Card;
+    removeCardFromOrigin(droppedCard);
+    return stacks;
+  };
   return (
     <div className="App"
       style={{
@@ -90,13 +99,15 @@ export default function App() {
         CardPile={computerPile}
         Discard={computerDiscard} onDiscard={onComputerDiscard}
         Crapo={computerCrapo} onCrapo={onComputerCrapo}
-        OriginIndex="0" DropTarget="0"/>
-      <Board WorkingPiles={workingPiles} onCardPlaced={onWorkingPile} />
+        OriginIndex="0" DropTarget="0" />
+      <Board
+        WorkingPiles={workingPiles} onCardPlaced={onWorkingPile}
+        Stacks={stacks} onCardStacked={onStack} />
       <Deck
         CardPile={userPile}
         Discard={userDiscard} onDiscard={onUserDiscard}
         Crapo={userCrapo} onCrapo={onUserCrapo}
-        OriginIndex="1" DropTarget="1"/>
+        OriginIndex="1" DropTarget="1" />
     </div>
   );
 }
