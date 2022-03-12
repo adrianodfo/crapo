@@ -33,6 +33,13 @@ export default function App() {
   const onStack= (droppedCard, targetIndex) => {
     setStacks(previousState => processStacks(previousState, droppedCard, targetIndex));
   };
+  const onComputerPile= () =>{
+    setComputerPile(previousState => {
+      let computerPile = previousState.slice();
+      computerPile[computerPile.length-1].IsOpen = true;
+      return computerPile;
+    })
+  }
   const removeCardFromOrigin = (droppedCard) => {
     switch (droppedCard.Origin) {
       case "WorkingPile":
@@ -96,7 +103,7 @@ export default function App() {
         height: "100vh"
       }}>
       <Deck
-        CardPile={computerPile}
+        CardPile={computerPile} onPileClicked={onComputerPile}
         Discard={computerDiscard} onDiscard={onComputerDiscard}
         Crapo={computerCrapo} onCrapo={onComputerCrapo}
         OriginIndex="0" DropTarget="0" />
