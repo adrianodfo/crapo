@@ -13,7 +13,7 @@ function WorkingPile(props) {
     cards = (props.Cards.map((card, mapIndex) => renderCard(card, mapIndex)));
   }
   else {
-    cards = renderCard({}, 0);
+    cards = renderEmptyPile();
   }
   let styles = "WorkingPile";
   if (props.OriginIndex % 2 == 0) {
@@ -36,6 +36,12 @@ function WorkingPile(props) {
           <Card Index={card.Index} Suit={card.Suit} />
         </Drop>
       </Drag>);
+  }
+  function renderEmptyPile() {
+    return (
+      <Drop onDropped={cardDropped}>
+        <Card />
+      </Drop>);
   }
 }
 
