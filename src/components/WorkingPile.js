@@ -8,8 +8,12 @@ function WorkingPile(props) {
   const cardDropped = (droppedCard) => {
     props.onCardPlaced(droppedCard, props.DropTarget);
   }
-  if (props.Cards) {
+
+  if (props.Cards && props.Cards.length > 0) {
     cards = (props.Cards.map((card, mapIndex) => renderCard(card, mapIndex)));
+  }
+  else {
+    cards = renderCard({}, 0);
   }
   let styles = "WorkingPile";
   if (props.OriginIndex % 2 == 0) {
@@ -22,15 +26,14 @@ function WorkingPile(props) {
   );
   function renderCard(card, mapIndex) {
     return (
-      <Drag dataItem={
-        {
+      <Drag Key={mapIndex}
+        dataItem={{
           Card: { Index: card.Index, Suit: card.Suit },
           Origin: "WorkingPile",
           OriginIndex: props.OriginIndex
-        }
-      }>
+        }}>
         <Drop onDropped={cardDropped}>
-          <Card Index={card.Index} Suit={card.Suit} Key={mapIndex} />
+          <Card Index={card.Index} Suit={card.Suit} />
         </Drop>
       </Drag>);
   }
