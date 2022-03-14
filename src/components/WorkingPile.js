@@ -40,7 +40,7 @@ function WorkingPile(props) {
   function renderEmptyPile() {
     return (
       <Drop onDropped={cardDropped}>
-        <Card />
+         <div className="CardPlaceholder"></div>
       </Drop>);
   }
 }

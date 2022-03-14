@@ -15,3 +15,13 @@
 .WorkingPile.Left{
   flex-direction: row-reverse;
 }
+
+.CardPlaceholder{
+  box-sizing:border-box;
+  background-color: black;
+  border-radius: 5px;
+  width: 64px;
+  height: 96px;
+  opacity: 40%;
+  border: 2px solid black;
+}
