@@ -40,6 +40,13 @@ export default function App() {
       return computerPile;
     })
   }
+  const onUserPile= () =>{
+    setUserPile(previousState => {
+      let userPile = previousState.slice();
+      userPile[userPile.length-1].IsOpen = true;
+      return userPile;
+    })
+  }
   const removeCardFromOrigin = (droppedCard) => {
     switch (droppedCard.Origin) {
       case "WorkingPile":
@@ -111,7 +118,7 @@ export default function App() {
         WorkingPiles={workingPiles} onCardPlaced={onWorkingPile}
         Stacks={stacks} onCardStacked={onStack} />
       <Deck
-        CardPile={userPile}
+        CardPile={userPile}  onPileClicked={onUserPile}
         Discard={userDiscard} onDiscard={onUserDiscard}
         Crapo={userCrapo} onCrapo={onUserCrapo}
         OriginIndex="1" DropTarget="1" />
