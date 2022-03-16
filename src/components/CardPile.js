@@ -1,5 +1,4 @@
 import './CardPile.css';
-import cardback from '../resources/cardback.png';
 import Drag from '../dragAndDrop/Drag';
 import { Card } from "./Card";
 
@@ -10,12 +9,8 @@ function CardPile(props) {
   }
   return (
     <div
-      className="CardPile"
-      onClick={props.onPileClicked}
-      style={{
-        backgroundImage: `url(${cardback})`,
-        backgroundRepeat: "repeat"
-      }}>
+      className="CardPile back"
+      onClick={props.onPileClicked}>
     </div>
   );
   function renderCard(card) {

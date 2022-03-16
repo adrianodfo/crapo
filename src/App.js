@@ -1,5 +1,4 @@
 import './App.css';
-import background_green from './resources/background-green.png';
 import Deck from './components/Deck';
 import Board from './components/Board';
 import Game from './game/game';
@@ -103,12 +102,7 @@ export default function App() {
     return stacks;
   };
   return (
-    <div className="App"
-      style={{
-        backgroundImage: `url(${background_green})`,
-        backgroundSize: "cover",
-        height: "100vh"
-      }}>
+    <div className="App">
       <Deck
         CardPile={computerPile} onPileClicked={onComputerPile}
         Discard={computerDiscard} onDiscard={onComputerDiscard}
