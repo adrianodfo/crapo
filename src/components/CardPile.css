@@ -6,3 +6,16 @@
   border: 1px solid black;
   border-radius: 5px;
 }
+
+.CardPile.back{
+  background-color: #e5e5f7;
+  opacity: 1;
+  background-image:
+    linear-gradient(135deg, #b31a1a 25%, transparent 25%),
+    linear-gradient(225deg, #b31a1a 25%, transparent 25%),
+    linear-gradient(45deg, #b31a1a 25%, transparent 25%),
+    linear-gradient(315deg, #b31a1a 25%, #e5e5f7 25%);
+  background-position:  16px 0, 16px 0, 0 0, 0 0;
+  background-size: 16px 16px;
+  background-repeat: repeat;
+}
