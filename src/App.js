@@ -73,6 +73,22 @@ export default function App() {
           });
         }
         break;
+      case "CardPile":
+        //todo: OriginIndex="0" means computer. Need to find a better way
+        if (droppedCard.OriginIndex === "0") {
+          setComputerPile(previousState => {
+            let pile = previousState.slice();
+            pile.splice(-1, 1);
+            return pile;
+          });
+        }
+        else {
+          setUserPile(previousState => {
+            let pile = previousState.slice();
+            pile.splice(-1, 1);
+            return pile;
+          });
+        }
       default:
         break;
     }
