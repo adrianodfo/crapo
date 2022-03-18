@@ -29,20 +29,32 @@ export default function App() {
   const onWorkingPile = (droppedCard, targetIndex) => {
     setWorkingPiles(previousState => processWorkingPiles(previousState, droppedCard, targetIndex));
   };
-  const onStack= (droppedCard, targetIndex) => {
+  const onStack = (droppedCard, targetIndex) => {
     setStacks(previousState => processStacks(previousState, droppedCard, targetIndex));
   };
-  const onComputerPile= () =>{
+  const onComputerPile = () => {
     setComputerPile(previousState => {
       let computerPile = previousState.slice();
-      computerPile[computerPile.length-1].IsOpen = true;
+      if (computerPile.length == 0 && computerDiscard.length > 0) {
+        computerPile = computerDiscard.slice();
+        setComputerDiscard([]);
+      }
+      if (computerPile.length > 0) {
+        computerPile[computerPile.length - 1].IsOpen = true;
+      }
       return computerPile;
     })
   }
-  const onUserPile= () =>{
+  const onUserPile = () => {
     setUserPile(previousState => {
       let userPile = previousState.slice();
-      userPile[userPile.length-1].IsOpen = true;
+      if (userPile.length == 0 && userDiscard.length > 0) {
+        userPile = userDiscard.slice();
+        setUserDiscard([]);
+      }
+      if (userPile.length > 0) {
+        userPile[userPile.length - 1].IsOpen = true;
+      }
       return userPile;
     })
   }
@@ -128,7 +140,7 @@ export default function App() {
         WorkingPiles={workingPiles} onCardPlaced={onWorkingPile}
         Stacks={stacks} onCardStacked={onStack} />
       <Deck
-        CardPile={userPile}  onPileClicked={onUserPile}
+        CardPile={userPile} onPileClicked={onUserPile}
         Discard={userDiscard} onDiscard={onUserDiscard}
         Crapo={userCrapo} onCrapo={onUserCrapo}
         OriginIndex="1" DropTarget="1" />
