@@ -33,12 +33,11 @@ class Game {
         }
         let cardIndexes = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
         let playingCards = [];
-        cardIndexes.forEach(cardIndex => {
-            Object.keys(Suits).forEach(key => {
-                let card = { Index: cardIndex, Suit: Suits[key], IsAvail: true };
-                playingCards.push(card);
-                playingCards.push(card);
-            });
+        Object.keys(Suits).forEach(key => {
+            for (let i = 0; i < 13; i++) {
+                playingCards.push({ Index: cardIndexes[i], Suit: Suits[key], IndexNumber: i });
+                playingCards.push({ Index: cardIndexes[i], Suit: Suits[key], IndexNumber: i });
+            }
         });
         return Scramble(playingCards);
     }
@@ -46,7 +45,7 @@ class Game {
         let workingPiles = [];
         for (var i = 0; i < 8; i++) {
             let workingPile = [];
-            workingPile.push({ Index: playingCards[i].Index, Suit: playingCards[i].Suit });
+            workingPile.push({ ...playingCards[i] });
             workingPiles.push(workingPile);
         }
         return workingPiles;

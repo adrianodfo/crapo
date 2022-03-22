@@ -17,13 +17,13 @@ function Crapo(props) {
     (<div className="Crapo">
       <Drag dataItem={
         {
-          Card: { Index: card.Index, Suit: card.Suit },
+          Card: { ...card },
           Origin: "Crapo",
           OriginIndex: props.OriginIndex
         }
       }>
         <Drop onDropped={cardDropped}>
-          <Card Index={card.Index} Suit={card.Suit} />
+          <Card {...card} />
         </Drop>
       </Drag>
     </div>)

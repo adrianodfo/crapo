@@ -14,24 +14,36 @@ export default function App() {
   const [userPile, setUserPile] = useState(game.userPile);
   const [userDiscard, setUserDiscard] = useState(game.userDiscard);
   const [userCrapo, setUserCrapo] = useState(game.userCrapo);
+
   const onComputerDiscard = (droppedCard) => {
     setComputerDiscard(previousState => processDiscard(previousState, droppedCard));
   };
+
   const onComputerCrapo = (droppedCard) => {
     setComputerCrapo(previousState => processCrapo(previousState, droppedCard));
   };
+
   const onUserDiscard = (droppedCard) => {
     setUserDiscard(previousState => processDiscard(previousState, droppedCard));
   };
+
   const onUserCrapo = (droppedCard) => {
     setUserCrapo(previousState => processCrapo(previousState, droppedCard));
   };
+
   const onWorkingPile = (droppedCard, targetIndex) => {
     setWorkingPiles(previousState => processWorkingPiles(previousState, droppedCard, targetIndex));
   };
+
   const onStack = (droppedCard, targetIndex) => {
-    setStacks(previousState => processStacks(previousState, droppedCard, targetIndex));
+    const hasCardOnStack = !!stacks[targetIndex];
+    const canDrop = !hasCardOnStack && droppedCard.Card.Index == 'A'
+      || hasCardOnStack && droppedCard.Card.IndexNumber === stacks[targetIndex].IndexNumber + 1;
+    if (canDrop) {
+      setStacks(previousState => processStacks(previousState, droppedCard, targetIndex));
+    }
   };
+
   const onComputerPile = () => {
     setComputerPile(previousState => {
       let computerPile = previousState.slice();
@@ -44,7 +56,8 @@ export default function App() {
       }
       return computerPile;
     })
-  }
+  };
+
   const onUserPile = () => {
     setUserPile(previousState => {
       let userPile = previousState.slice();
@@ -57,7 +70,8 @@ export default function App() {
       }
       return userPile;
     })
-  }
+  };
+
   const removeCardFromOrigin = (droppedCard) => {
     switch (droppedCard.Origin) {
       case "WorkingPile":
@@ -105,30 +119,35 @@ export default function App() {
         break;
     }
   };
+
   const processCrapo = (previousState, droppedCard) => {
     let crapo = previousState.slice();
     crapo.push(droppedCard.Card);
     removeCardFromOrigin(droppedCard);
     return crapo;
   };
+
   const processDiscard = (previousState, droppedCard) => {
     let discard = previousState.slice();
     discard.push(droppedCard.Card);
     removeCardFromOrigin(droppedCard);
     return discard;
   };
+
   const processWorkingPiles = (previousState, droppedCard, targetIndex) => {
     let workingPiles = previousState.slice();
     workingPiles[targetIndex].push(droppedCard.Card);
     removeCardFromOrigin(droppedCard);
     return workingPiles;
   };
+
   const processStacks = (previousState, droppedCard, targetIndex) => {
     let stacks = previousState.slice();
     stacks[targetIndex] = droppedCard.Card;
     removeCardFromOrigin(droppedCard);
     return stacks;
   };
+
   return (
     <div className="App">
       <Deck

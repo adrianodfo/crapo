@@ -17,11 +17,11 @@ function CardPile(props) {
     return (
       <Drag
         dataItem={{
-          Card: { Index: card.Index, Suit: card.Suit },
+          Card: { ...card },
           Origin: "CardPile",
           OriginIndex: props.OriginIndex
         }}>
-        <Card Index={card.Index} Suit={card.Suit} />
+        <Card {...card} />
       </Drag>);
   };
   function getTopCard(cardPile) {

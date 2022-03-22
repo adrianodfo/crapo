@@ -28,12 +28,12 @@ function WorkingPile(props) {
     return (
       <Drag Key={mapIndex}
         dataItem={{
-          Card: { Index: card.Index, Suit: card.Suit },
+          Card: {...card},
           Origin: "WorkingPile",
           OriginIndex: props.OriginIndex
         }}>
         <Drop onDropped={cardDropped}>
-          <Card Index={card.Index} Suit={card.Suit} />
+          <Card Index={card.Index} Suit={card.Suit} IndexNumber={card.IndexNumber} />
         </Drop>
       </Drag>);
   }
