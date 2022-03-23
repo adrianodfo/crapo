@@ -16,7 +16,12 @@ export default function App() {
   const [userCrapo, setUserCrapo] = useState(game.userCrapo);
 
   const onComputerDiscard = (droppedCard) => {
-    setComputerDiscard(previousState => processDiscard(previousState, droppedCard));
+    const isFromComputerPile = droppedCard.Origin == "CardPile" && droppedCard.OriginIndex == "0";
+    if (isFromComputerPile ||
+      computerDiscard.length &&
+      IsSameSuiteSequence(droppedCard.Card, computerDiscard[computerDiscard.length - 1])) {
+        setComputerDiscard(previousState => processDiscard(previousState, droppedCard));
+    }
   };
 
   const onComputerCrapo = (droppedCard) => {
@@ -24,8 +29,18 @@ export default function App() {
   };
 
   const onUserDiscard = (droppedCard) => {
-    setUserDiscard(previousState => processDiscard(previousState, droppedCard));
+    const isFromUserPile = droppedCard.Origin == "CardPile" && droppedCard.OriginIndex == "1";
+    if (isFromUserPile ||
+      userDiscard.length &&
+      IsSameSuiteSequence(droppedCard.Card, userDiscard[userDiscard.length - 1])) {
+      setUserDiscard(previousState => processDiscard(previousState, droppedCard));
+    }
   };
+
+  const IsSameSuiteSequence = (cardA, cardB) => {
+    return cardA.Suit == cardB.Suit &&
+       Math.abs(cardA.IndexNumber - cardB.IndexNumber) == 1;
+  }
 
   const onUserCrapo = (droppedCard) => {
     setUserCrapo(previousState => processCrapo(previousState, droppedCard));
