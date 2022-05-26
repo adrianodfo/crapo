@@ -8,7 +8,7 @@ function Crapo(props) {
   let card = {};
   if (hasCard) {
     let topCard = props.Crapo[props.Crapo.length - 1];
-    card = { Index: topCard.Index, Suit: topCard.Suit };
+    card = { Index: topCard.Index, Suit: topCard.Suit, IndexNumber: topCard.IndexNumber };
   }
   const cardDropped = (droppedCard) => {
     props.onCardPlaced(droppedCard, props.DropTarget);
