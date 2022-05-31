@@ -2,7 +2,7 @@ import './App.css';
 import Deck from './components/Deck';
 import Board from './components/Board';
 import Game from './game/game';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function App() {
   const game = new Game();
@@ -14,13 +14,14 @@ export default function App() {
   const [userPile, setUserPile] = useState(game.userPile);
   const [userDiscard, setUserDiscard] = useState(game.userDiscard);
   const [userCrapo, setUserCrapo] = useState(game.userCrapo);
+  const [computerTurn, setComputerTurn] = useState(false);
 
   const onComputerDiscard = (droppedCard) => {
     const isFromComputerPile = droppedCard.Origin == "CardPile" && droppedCard.OriginIndex == "0";
     if (isFromComputerPile ||
       computerDiscard.length &&
       IsSameSuiteSequence(droppedCard.Card, computerDiscard[computerDiscard.length - 1])) {
-        setComputerDiscard(previousState => processDiscard(previousState, droppedCard));
+      setComputerDiscard(previousState => processDiscard(previousState, droppedCard));
     }
   };
 
@@ -29,17 +30,21 @@ export default function App() {
   };
 
   const onUserDiscard = (droppedCard) => {
+    if (computerTurn) {
+      return;
+    }
     const isFromUserPile = droppedCard.Origin == "CardPile" && droppedCard.OriginIndex == "1";
     if (isFromUserPile ||
       userDiscard.length &&
       IsSameSuiteSequence(droppedCard.Card, userDiscard[userDiscard.length - 1])) {
       setUserDiscard(previousState => processDiscard(previousState, droppedCard));
     }
+    setComputerTurn(true);
   };
 
   const IsSameSuiteSequence = (cardA, cardB) => {
     return cardA.Suit == cardB.Suit &&
-       Math.abs(cardA.IndexNumber - cardB.IndexNumber) == 1;
+      Math.abs(cardA.IndexNumber - cardB.IndexNumber) == 1;
   }
 
   const onUserCrapo = (droppedCard) => {
@@ -74,6 +79,9 @@ export default function App() {
   };
 
   const onUserPile = () => {
+    if (computerTurn) {
+      return;
+    }
     setUserPile(previousState => {
       let userPile = previousState.slice();
       if (userPile.length == 0 && userDiscard.length > 0) {
@@ -162,6 +170,52 @@ export default function App() {
     removeCardFromOrigin(droppedCard);
     return stacks;
   };
+
+  const TryToPlaceOnUserCrapo = (computerCard) =>{
+    if( userCrapo.length > 0 ){
+      let userCrapoCard = userCrapo[userCrapo.length-1];
+      if(IsSameSuiteSequence(computerCard, userCrapoCard)){
+        onUserCrapo(computerCard);
+      }
+    }
+  };
+
+  const TryToPlaceOnUserDiscard = (computerCard) =>{
+    if( userDiscard.length > 0 ){
+      let userDiscardCard = userDiscard[userDiscard.length-1];
+      if(IsSameSuiteSequence(computerCard, userDiscardCard)){
+        onUserDiscard(computerCard);
+      }
+    }
+  };
+
+  const ExecuteComputerMove = () => {
+    if(computerCrapo.length > 0){
+      let computerCrapoCard = computerCrapo[computerCrapo.length-1];      
+      if(TryToPlaceOnUserCrapo(computerCrapoCard))
+      {
+        return true;
+      }
+    }
+    if(computerPile.length > 0){
+      let computerPileCard = computerPile[computerPile.length - 1];
+      if(TryToPlaceOnUserCrapo(computerPileCard))
+      {
+        return true;
+      }
+      if(TryToPlaceOnUserDiscard(computerPileCard))
+      {
+        return true;
+      }
+    }
+
+    return false;
+  };
+
+  useEffect( () => {
+    while(computerTurn && ExecuteComputerMove()){};
+    setComputerTurn(false);
+  }, [computerTurn]);
 
   return (
     <div className="App">
